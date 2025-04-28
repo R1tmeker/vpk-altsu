@@ -1,3 +1,4 @@
+// Импорт необходимых компонентов и зависимостей
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
@@ -16,10 +17,12 @@ import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
   return (
+    // Оборачиваем приложение в провайдер аутентификации
     <AuthProvider>
+      {/* Настройка маршрутизации */}
       <Router>
         <Routes>
-          {/* Pages with layout */}
+          {/* Страницы с общим layout */}
           <Route 
             path="/" 
             element={
@@ -77,14 +80,14 @@ function App() {
             } 
           />
           
-          {/* Admin dashboard */}
+          {/* Панель администратора */}
           <Route path="/admin" element={<AdminPage />} />
           
-          {/* Auth pages (without standard header/footer) */}
+          {/* Страницы аутентификации (без стандартного header/footer) */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           
-          {/* 404 page */}
+          {/* Страница 404 */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>

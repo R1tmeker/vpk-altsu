@@ -1,9 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  // Конфигурация Tailwind CSS
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'], // Файлы для сканирования
   theme: {
     extend: {
+      // Расширение темы
       colors: {
+        // Основные цвета
         primary: {
           50: '#e6f1ff',
           100: '#cce3ff',
@@ -16,6 +19,7 @@ export default {
           800: '#001f4d',
           900: '#000f26',
         },
+        // Дополнительные цвета
         secondary: {
           50: '#ffe6e9',
           100: '#ffccd3',
@@ -29,14 +33,16 @@ export default {
           900: '#330000',
         },
       },
+      // Шрифты
       fontFamily: {
         sans: ['Roboto', 'system-ui', 'sans-serif'],
       },
+      // Тени
       boxShadow: {
         'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
         'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
       },
     },
   },
-  plugins: [],
+  plugins: [], // Плагины
 };

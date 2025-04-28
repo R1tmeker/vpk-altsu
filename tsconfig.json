@@ -1,7 +1,8 @@
 {
+  // Основной конфигурационный файл TypeScript
   "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+    { "path": "./tsconfig.app.json" },   // Конфигурация для приложения
+    { "path": "./tsconfig.node.json" }   // Конфигурация для Node.js
   ]
 }

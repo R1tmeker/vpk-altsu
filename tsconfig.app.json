@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
+    // Настройки компилятора TypeScript для приложения
+    "target": "ES2020",                // Целевая версия ECMAScript
+    "useDefineForClassFields": true,   // Использование define для полей классов
+    "lib": ["ES2020", "DOM", "DOM.Iterable"], // Подключаемые библиотеки
+    "module": "ESNext",                // Система модулей
+    "skipLibCheck": true,              // Пропуск проверки библиотек
 
-    /* Bundler mode */
+    // Настройки для бандлера
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
@@ -14,11 +15,11 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Linting */
+    // Настройки проверки кода
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src"]  // Включаемые файлы
 }

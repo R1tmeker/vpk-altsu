@@ -1,4 +1,3 @@
-// Импортирование зависимостей
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Calendar, Tag, ArrowLeft } from 'lucide-react';
@@ -7,16 +6,11 @@ import { mockNewsArticles, mockUsers } from '../data/mockData';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 
-// Основная компонента страницы статьи
 const NewsArticlePage: React.FC = () => {
-  // Получаем параметр из URL
   const { id } = useParams();
-  // Ищем статью по ID
   const article = mockNewsArticles.find(article => article.id === id);
-  // Ищем автора статьи
   const author = mockUsers.find(user => user.id === article?.createdBy);
 
-  // Если статья не найдена, показываем сообщение об ошибке
   if (!article) {
     return (
       <div className="min-h-screen bg-gray-50 py-12">
@@ -32,7 +26,6 @@ const NewsArticlePage: React.FC = () => {
     );
   }
 
-  // Отображение статьи, если она найдена
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,7 +36,6 @@ const NewsArticlePage: React.FC = () => {
           </Link>
         </div>
 
-        {/* Отображение изображения, если оно есть */}
         {article.coverImage && (
           <div className="relative h-[400px] rounded-lg overflow-hidden mb-8">
             <img
@@ -54,7 +46,6 @@ const NewsArticlePage: React.FC = () => {
           </div>
         )}
 
-        {/* Основное содержание статьи */}
         <div className="bg-white rounded-lg shadow-sm p-8">
           <div className="mb-6">
             <Badge variant="primary" className="mb-2">
@@ -75,13 +66,11 @@ const NewsArticlePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Содержание статьи, переданное через dangerouslySetInnerHTML */}
           <div 
             className="prose prose-lg max-w-none"
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
 
-          {/* Отображение тегов, если они есть */}
           {article.tags.length > 0 && (
             <div className="mt-8 pt-6 border-t border-gray-200">
               <div className="flex flex-wrap gap-2">
@@ -103,5 +92,4 @@ const NewsArticlePage: React.FC = () => {
   );
 };
 
-// Экспортируем компоненту
 export default NewsArticlePage;

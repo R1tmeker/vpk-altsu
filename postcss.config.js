@@ -1,6 +1,7 @@
+// Конфигурация PostCSS
 export default {
   plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
+    tailwindcss: {},    // Подключаем Tailwind CSS
+    autoprefixer: {},   // Подключаем Autoprefixer для добавления вендорных префиксов
   },
 };

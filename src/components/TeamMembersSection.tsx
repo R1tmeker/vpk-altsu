@@ -32,7 +32,7 @@ export const TeamMembersSection: React.FC<TeamMembersSectionProps> = ({ members 
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {members
-            .filter(member => member.role !== 'user') 
+            .filter(member => member.role !== 'user') // Only show staff, not regular users
             .map((member) => (
               <Card key={member.id} hoverable className="text-center overflow-hidden transition-all duration-300 hover:-translate-y-1">
                 <div className="h-48 overflow-hidden bg-gray-200">

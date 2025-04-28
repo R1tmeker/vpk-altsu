@@ -79,6 +79,14 @@
 - Достижения
 - Уведомления
 
+## Технологии
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router DOM
+- React Hook Form
+
 ## Установка и запуск
 
 ### Требования

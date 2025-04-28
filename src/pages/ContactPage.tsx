@@ -1,49 +1,43 @@
-// Импортируем необходимые библиотеки и компоненты
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Send } from 'lucide-react'; // Иконки
-import { Card, CardContent } from '../components/ui/Card'; // Компоненты карточки
-import { Button } from '../components/ui/Button'; // Кнопка
-import { Input } from '../components/ui/Input'; // Поле ввода
-import { Alert } from '../components/ui/Alert'; // Уведомление об ошибке/успехе
-import { useForm } from 'react-hook-form'; // Библиотека для работы с формами
-import { ContactForm } from '../types'; // Тип данных формы
-import { handleContactFormSubmission } from '../data/mockData'; // Моковая функция отправки данных
+import { MapPin, Phone, Mail, Send } from 'lucide-react';
+import { Card, CardContent } from '../components/ui/Card';
+import { Button } from '../components/ui/Button';
+import { Input } from '../components/ui/Input';
+import { Alert } from '../components/ui/Alert';
+import { useForm } from 'react-hook-form';
+import { ContactForm } from '../types';
+import { handleContactFormSubmission } from '../data/mockData';
 
 const ContactPage: React.FC = () => {
-  // Локальные состояния для отслеживания отправки формы и результата
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState<{ success: boolean; message: string } | null>(null);
   
-  // Инициализация хука формы
   const { register, handleSubmit, formState: { errors }, reset } = useForm<ContactForm>();
 
-  // Функция обработки отправки формы
   const onSubmit = async (data: ContactForm) => {
-    setIsSubmitting(true); // Устанавливаем состояние "отправляется"
-    setSubmitResult(null); // Сбрасываем прошлый результат
+    setIsSubmitting(true);
+    setSubmitResult(null);
     
     try {
-      // Пытаемся отправить данные формы
       const result = await handleContactFormSubmission(data);
-      setSubmitResult(result); // Сохраняем результат
+      setSubmitResult(result);
       if (result.success) {
-        reset(); // Очищаем форму, если успешно
+        reset();
       }
     } catch (error) {
-      // В случае ошибки показываем сообщение об ошибке
       setSubmitResult({
         success: false,
         message: 'Произошла ошибка при отправке сообщения. Пожалуйста, попробуйте позже.',
       });
     } finally {
-      setIsSubmitting(false); // Завершаем процесс отправки
+      setIsSubmitting(false);
     }
   };
 
   return (
     <div className="bg-gray-50 min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Заголовок страницы */}
+        {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 font-heading mb-4">Контакты</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -52,11 +46,10 @@ const ContactPage: React.FC = () => {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
-          {/* Блок контактной информации */}
+          {/* Contact Information */}
           <div>
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Наши контакты</h2>
             
-            {/* Контактные карточки: адрес, телефон, email */}
             <div className="space-y-6">
               <Card>
                 <CardContent className="p-6">
@@ -104,11 +97,9 @@ const ContactPage: React.FC = () => {
               </Card>
             </div>
 
-            {/* Карта проезда */}
             <div className="mt-8">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Как добраться</h2>
               <div className="aspect-video rounded-lg overflow-hidden bg-gray-200">
-                {/* Встраивание карты (ссылка на профиль в Яндекс.Картах) */}
                 <iframe
                   src="https://yandex.ru/profile/87593302206?lang=ru"
                   width="100%"
@@ -121,7 +112,7 @@ const ContactPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Форма обратной связи */}
+          {/* Contact Form */}
           <div>
             <Card>
               <CardContent className="p-6">
@@ -129,7 +120,6 @@ const ContactPage: React.FC = () => {
                   Напишите нам
                 </h2>
 
-                {/* Показ уведомления об успехе или ошибке */}
                 {submitResult && (
                   <Alert
                     variant={submitResult.success ? 'success' : 'error'}
@@ -139,9 +129,7 @@ const ContactPage: React.FC = () => {
                   </Alert>
                 )}
 
-                {/* Форма с полями ввода */}
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                  {/* Поле "Имя" */}
                   <Input
                     id="name"
                     label="Ваше имя"
@@ -155,7 +143,6 @@ const ContactPage: React.FC = () => {
                     })}
                   />
 
-                  {/* Поле "Email" */}
                   <Input
                     id="email"
                     type="email"
@@ -170,7 +157,6 @@ const ContactPage: React.FC = () => {
                     })}
                   />
 
-                  {/* Поле "Телефон" (опционально) */}
                   <Input
                     id="phone"
                     type="tel"
@@ -178,7 +164,6 @@ const ContactPage: React.FC = () => {
                     {...register('phone')}
                   />
 
-                  {/* Поле "Сообщение" */}
                   <div>
                     <label 
                       htmlFor="message" 
@@ -207,7 +192,6 @@ const ContactPage: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Кнопка отправки */}
                   <Button
                     type="submit"
                     variant="primary"

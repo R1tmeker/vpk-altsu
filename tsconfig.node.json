@@ -1,22 +1,23 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2023"],
-    "module": "ESNext",
-    "skipLibCheck": true,
+    // Настройки компилятора TypeScript для Node.js
+    "target": "ES2022",                // Целевая версия ECMAScript
+    "lib": ["ES2023"],                 // Подключаемые библиотеки
+    "module": "ESNext",                // Система модулей
+    "skipLibCheck": true,              // Пропуск проверки библиотек
 
-    /* Bundler mode */
+    // Настройки для бандлера
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
 
-    /* Linting */
+    // Настройки проверки кода
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["vite.config.ts"]
+  "include": ["vite.config.ts"]  // Включаемые файлы
 }
