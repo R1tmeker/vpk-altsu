@@ -1,3 +1,4 @@
+// Импортируем необходимые библиотеки и компоненты
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Card, CardContent } from '../components/ui/Card';
@@ -7,6 +8,7 @@ import { Alert } from '../components/ui/Alert';
 import { Star, Mail, Lock, User } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 
+// Интерфейс данных формы регистрации
 interface RegisterFormData {
   email: string;
   password: string;
@@ -15,26 +17,29 @@ interface RegisterFormData {
 }
 
 const RegisterPage: React.FC = () => {
+  // Хуки состояния для загрузки и ошибок
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
+  // Хуки для управления формой с помощью react-hook-form
   const { register, handleSubmit, formState: { errors }, watch } = useForm<RegisterFormData>();
   const password = watch('password');
 
+  // Обработчик отправки формы
   const onSubmit = async (data: RegisterFormData) => {
     setIsLoading(true);
     setError(null);
 
     try {
-      // Simulate API call delay
+      // Симуляция задержки при вызове API
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // In a real app, this would create a new user
-      // For now, just redirect to login
+      // В реальном приложении это создало бы нового пользователя
+      // Пока просто перенаправляем на страницу входа
       navigate('/login');
     } catch (error) {
-      console.error('Registration error:', error);
+      console.error('Ошибка при регистрации:', error);
       setError('Произошла ошибка при регистрации. Пожалуйста, попробуйте позже.');
     } finally {
       setIsLoading(false);
@@ -44,6 +49,7 @@ const RegisterPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full">
+        {/* Логотип и заголовок */}
         <div className="text-center mb-6">
           <Link to="/" className="inline-flex items-center justify-center">
             <Star className="h-10 w-10 text-secondary-500" />
@@ -55,14 +61,17 @@ const RegisterPage: React.FC = () => {
           </p>
         </div>
 
+        {/* Форма регистрации */}
         <Card>
           <CardContent className="pt-6">
+            {/* Ошибки при регистрации */}
             {error && (
               <Alert variant="error" className="mb-4">
                 {error}
               </Alert>
             )}
 
+            {/* Форма с полями для ввода данных */}
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <Input
                 id="fullName"
@@ -121,6 +130,7 @@ const RegisterPage: React.FC = () => {
                 })}
               />
 
+              {/* Кнопка отправки формы */}
               <Button
                 type="submit"
                 variant="primary"
@@ -131,6 +141,7 @@ const RegisterPage: React.FC = () => {
               </Button>
             </form>
 
+            {/* Ссылка на страницу входа */}
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
                 Уже есть аккаунт?{' '}
@@ -146,4 +157,5 @@ const RegisterPage: React.FC = () => {
   );
 };
 
+// Экспортируем компоненту
 export default RegisterPage;

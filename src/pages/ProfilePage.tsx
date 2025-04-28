@@ -1,3 +1,4 @@
+// Импортирование зависимостей
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -9,20 +10,23 @@ import { User, Shield, Medal, Calendar, MapPin, Mail, Phone } from 'lucide-react
 import { mockEvents } from '../data/mockData';
 import { format } from 'date-fns';
 
+// Основная компонента страницы профиля
 const ProfilePage: React.FC = () => {
+  // Получаем текущего пользователя и статус авторизации
   const { currentUser, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  // Redirect if not authenticated
+  // Перенаправление на страницу входа, если пользователь не авторизован
   React.useEffect(() => {
     if (!isAuthenticated) {
       navigate('/login');
     }
   }, [isAuthenticated, navigate]);
 
+  // Если текущий пользователь не найден, возвращаем null
   if (!currentUser) return null;
 
-  // Get user's upcoming events
+  // Получаем предстоящие события пользователя
   const userEvents = mockEvents
     .filter(event => new Date(event.startDate) > new Date())
     .slice(0, 3);
@@ -31,11 +35,12 @@ const ProfilePage: React.FC = () => {
     <div className="bg-gray-50 min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-3">
-          {/* Profile Info */}
+          {/* Блок с информацией о профиле */}
           <div className="md:col-span-1">
             <Card>
               <CardContent className="p-6">
                 <div className="text-center">
+                  {/* Отображаем аватар пользователя или иконку */}
                   {currentUser.avatar ? (
                     <img
                       src={currentUser.avatar}
@@ -50,6 +55,7 @@ const ProfilePage: React.FC = () => {
                   <h2 className="text-2xl font-semibold text-gray-900">{currentUser.name}</h2>
                   <p className="text-gray-600 mt-1">{currentUser.email}</p>
                   
+                  {/* Отображаем роль пользователя */}
                   <div className="mt-4 flex justify-center">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800">
                       {currentUser.role === 'admin' && 'Администратор'}
@@ -60,6 +66,7 @@ const ProfilePage: React.FC = () => {
                   </div>
                 </div>
 
+                {/* Дополнительная информация о пользователе */}
                 <div className="mt-6 border-t border-gray-200 pt-6">
                   <div className="space-y-4">
                     <div className="flex items-center text-gray-600">
@@ -77,6 +84,7 @@ const ProfilePage: React.FC = () => {
                   </div>
                 </div>
 
+                {/* Кнопка для редактирования профиля */}
                 <div className="mt-6">
                   <Button variant="outline" fullWidth>
                     Редактировать профиль
@@ -86,9 +94,9 @@ const ProfilePage: React.FC = () => {
             </Card>
           </div>
 
-          {/* Main Content */}
+          {/* Основной контент профиля */}
           <div className="md:col-span-2 space-y-8">
-            {/* Personal Information */}
+            {/* Личная информация */}
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Личная информация</h3>
@@ -126,7 +134,7 @@ const ProfilePage: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* Upcoming Events */}
+            {/* Предстоящие занятия */}
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Предстоящие занятия</h3>
@@ -163,7 +171,7 @@ const ProfilePage: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* Achievements */}
+            {/* Достижения пользователя */}
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Достижения</h3>
@@ -192,4 +200,5 @@ const ProfilePage: React.FC = () => {
   );
 };
 
+// Экспортируем компоненту
 export default ProfilePage;

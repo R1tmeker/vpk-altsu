@@ -1,9 +1,11 @@
 import React from 'react';
-import { Shield, Award, Users, Target } from 'lucide-react';
+import { Shield, Award, Users, Target } from 'lucide-react'; // Импорт иконок
 
 const AboutPage: React.FC = () => {
   return (
     <div className="bg-white">
+      
+      {/* Секция: Фоновое изображение с заголовком */}
       <div className="relative">
         <div className="absolute inset-0 bg-primary-700/80" />
         <div 
@@ -24,8 +26,10 @@ const AboutPage: React.FC = () => {
         </div>
       </div>
 
+      {/* Секция: Наша миссия */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Заголовок и описание миссии */}
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 font-heading mb-4">Наша миссия</h2>
             <p className="text-lg text-gray-600">
@@ -34,52 +38,57 @@ const AboutPage: React.FC = () => {
             </p>
           </div>
 
+          {/* Карточки с направлениями деятельности */}
           <div className="grid md:grid-cols-2 gap-8 mt-12">
+            {/* Карточка 1: Патриотическое воспитание */}
             <div className="bg-gray-50 rounded-lg p-8">
               <Shield className="h-12 w-12 text-primary-700 mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Патриотическое воспитание</h3>
               <p className="text-gray-600">
-                Мы проводим регулярные встречи с ветеранами, организуем посещения музеев и памятных мест, 
-                изучаем историю нашей страны и ее Вооруженных Сил.
+                Мы проводим встречи с ветеранами, посещаем музеи, изучаем историю страны и её Вооружённых сил.
               </p>
             </div>
 
+            {/* Карточка 2: Военная подготовка */}
             <div className="bg-gray-50 rounded-lg p-8">
               <Target className="h-12 w-12 text-primary-700 mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Военная подготовка</h3>
               <p className="text-gray-600">
-                Участники клуба проходят начальную военную подготовку, включающую строевую, огневую, 
-                тактическую подготовку и основы военного дела.
+                Строевая, огневая и тактическая подготовка, основы военного дела.
               </p>
             </div>
 
+            {/* Карточка 3: Спортивное развитие */}
             <div className="bg-gray-50 rounded-lg p-8">
               <Award className="h-12 w-12 text-primary-700 mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Спортивное развитие</h3>
               <p className="text-gray-600">
-                Регулярные спортивные тренировки, участие в соревнованиях по военно-прикладным видам спорта, 
-                развитие силы и выносливости.
+                Спортивные тренировки, участие в военно-спортивных соревнованиях, развитие выносливости.
               </p>
             </div>
 
+            {/* Карточка 4: Командная работа */}
             <div className="bg-gray-50 rounded-lg p-8">
               <Users className="h-12 w-12 text-primary-700 mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Командная работа</h3>
               <p className="text-gray-600">
-                Формирование навыков работы в команде, развитие лидерских качеств, 
-                взаимовыручка и поддержка товарищей.
+                Работа в команде, развитие лидерских качеств, взаимопомощь.
               </p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Секция: История клуба */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
+            {/* Заголовок секции */}
             <h2 className="text-3xl font-bold text-gray-900 font-heading mb-8 text-center">История клуба</h2>
             
+            {/* Этапы истории клуба */}
             <div className="space-y-8">
+              {/* Событие 1: Основание клуба */}
               <div className="flex gap-4">
                 <div className="flex-shrink-0 w-24 text-center">
                   <span className="text-lg font-semibold text-primary-700">2024</span>
@@ -87,12 +96,12 @@ const AboutPage: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Основание клуба</h3>
                   <p className="text-gray-600">
-                    Клуб был основан по приказу ректора АлтГУ с целью патриотического воспитания 
-                    студенческой молодежи и подготовки к военной службе.
+                    Клуб основан для патриотического воспитания студентов АлтГУ и подготовки к службе.
                   </p>
                 </div>
               </div>
 
+              {/* Событие 2: Начало деятельности */}
               <div className="flex gap-4">
                 <div className="flex-shrink-0 w-24 text-center">
                   <span className="text-lg font-semibold text-primary-700">2024</span>
@@ -100,12 +109,12 @@ const AboutPage: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Начало деятельности</h3>
                   <p className="text-gray-600">
-                    Формирование основных направлений работы, создание учебных программ и начало 
-                    регулярных тренировок.
+                    Создание учебных программ и организация первых тренировок.
                   </p>
                 </div>
               </div>
 
+              {/* Событие 3: Развитие партнерств */}
               <div className="flex gap-4">
                 <div className="flex-shrink-0 w-24 text-center">
                   <span className="text-lg font-semibold text-primary-700">2025</span>
@@ -113,12 +122,12 @@ const AboutPage: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Развитие партнерских отношений</h3>
                   <p className="text-gray-600">
-                    Установление сотрудничества с военными учебными заведениями, ветеранскими организациями 
-                    и другими патриотическими клубами региона.
+                    Сотрудничество с учебными заведениями и патриотическими организациями региона.
                   </p>
                 </div>
               </div>
 
+              {/* Событие 4: Расширение деятельности */}
               <div className="flex gap-4">
                 <div className="flex-shrink-0 w-24 text-center">
                   <span className="text-lg font-semibold text-primary-700">2025</span>
@@ -126,8 +135,7 @@ const AboutPage: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Расширение деятельности</h3>
                   <p className="text-gray-600">
-                    Увеличение количества направлений подготовки, организация региональных соревнований 
-                    и военно-патриотических мероприятий.
+                    Увеличение направлений подготовки, организация региональных мероприятий.
                   </p>
                 </div>
               </div>
@@ -136,6 +144,7 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Секция: Призыв к присоединению */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-primary-700 rounded-lg overflow-hidden">
@@ -147,6 +156,8 @@ const AboutPage: React.FC = () => {
                 Если вы разделяете наши ценности и готовы развиваться вместе с нами, 
                 мы будем рады видеть вас в рядах нашего клуба.
               </p>
+              
+              {/* Кнопки навигации */}
               <div className="space-y-4 md:space-y-0 md:space-x-4">
                 <a 
                   href="/schedule" 
@@ -165,6 +176,7 @@ const AboutPage: React.FC = () => {
           </div>
         </div>
       </section>
+
     </div>
   );
 };

@@ -1,34 +1,42 @@
+// Импорт необходимых библиотек и хуков
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { Users, CalendarDays, Image, MessageSquare } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // для навигации между страницами
+import { useAuth } from '../contexts/AuthContext'; // пользовательский контекст аутентификации
+import { Users, CalendarDays, Image, MessageSquare } from 'lucide-react'; // иконки для навигации
 
+// Объявление компонента AdminPage с типизацией через React.FC
 const AdminPage: React.FC = () => {
-  const { currentUser, userRole } = useAuth();
-  const navigate = useNavigate();
-  const [activeSection, setActiveSection] = useState<string>('dashboard');
-  
-  // Redirect if not admin
+  const { currentUser, userRole } = useAuth(); // получаем текущего пользователя и его роль из контекста
+  const navigate = useNavigate(); // хук для перенаправления
+  const [activeSection, setActiveSection] = useState<string>('dashboard'); // состояние для активной секции панели
+
+  // Эффект, который проверяет авторизацию пользователя
   React.useEffect(() => {
     if (!currentUser || userRole !== 'admin') {
-      navigate('/login');
+      navigate('/login'); // если не админ или не залогинен — редирект на страницу входа
     }
   }, [currentUser, userRole, navigate]);
 
-  // If not logged in or not authorized, don't render the page content
+  // Если пользователь не авторизован или не администратор — ничего не рендерим
   if (!currentUser || userRole !== 'admin') {
     return null;
   }
 
+  // Основной JSX возвращаемого интерфейса
   return (
     <div className="flex min-h-screen bg-gray-100">
-      {/* Sidebar */}
+      
+      {/* Боковая панель (Sidebar) */}
       <aside className="w-64 bg-white shadow-md">
         <div className="p-4 border-b">
+          {/* Заголовок панели */}
           <h2 className="text-xl font-bold text-gray-800">Панель управления</h2>
         </div>
+
+        {/* Навигационное меню в сайдбаре */}
         <nav className="p-4">
           <ul className="space-y-2">
+            {/* Кнопка для перехода к Расписанию */}
             <li>
               <button
                 onClick={() => setActiveSection('schedule')}
@@ -40,6 +48,8 @@ const AdminPage: React.FC = () => {
                 Расписание
               </button>
             </li>
+
+            {/* Кнопка для перехода к Составу */}
             <li>
               <button
                 onClick={() => setActiveSection('composition')}
@@ -51,6 +61,8 @@ const AdminPage: React.FC = () => {
                 Состав
               </button>
             </li>
+
+            {/* Кнопка для перехода к загрузке Фото */}
             <li>
               <button
                 onClick={() => setActiveSection('photos')}
@@ -62,6 +74,8 @@ const AdminPage: React.FC = () => {
                 Загрузить фото
               </button>
             </li>
+
+            {/* Кнопка для перехода к Заявкам */}
             <li>
               <button
                 onClick={() => setActiveSection('applications')}
@@ -77,15 +91,19 @@ const AdminPage: React.FC = () => {
         </nav>
       </aside>
 
-      {/* Main Content */}
+      {/* Основная часть страницы (контент) */}
       <main className="flex-1 p-8">
+        
+        {/* Заголовок основной части с приветствием пользователя */}
         <header className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">
             Добро пожаловать, {currentUser.full_name}!
           </h1>
         </header>
 
-        {/* Content Sections */}
+        {/* Отображение секций в зависимости от выбранной вкладки */}
+
+        {/* Секция Расписания */}
         {activeSection === 'schedule' && (
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-xl font-semibold mb-4">Расписание</h2>
@@ -105,12 +123,13 @@ const AdminPage: React.FC = () => {
                   <td className="p-3 border">10:00 - 11:30</td>
                   <td className="p-3 border">ВУЦ</td>
                 </tr>
-                {/* Add more rows as needed */}
+                {/* Здесь можно добавить больше строк расписания */}
               </tbody>
             </table>
           </div>
         )}
 
+        {/* Секция Состава */}
         {activeSection === 'composition' && (
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-xl font-semibold mb-4">Состав</h2>
@@ -132,12 +151,13 @@ const AdminPage: React.FC = () => {
                     </button>
                   </td>
                 </tr>
-                {/* Add more rows as needed */}
+                {/* Здесь можно добавить больше участников */}
               </tbody>
             </table>
           </div>
         )}
 
+        {/* Секция Загрузки Фото */}
         {activeSection === 'photos' && (
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-xl font-semibold mb-4">Загрузить фото</h2>
@@ -158,6 +178,7 @@ const AdminPage: React.FC = () => {
                     hover:file:bg-blue-100"
                 />
               </div>
+              {/* Кнопка отправки формы загрузки */}
               <button
                 type="submit"
                 className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
@@ -168,6 +189,7 @@ const AdminPage: React.FC = () => {
           </div>
         )}
 
+        {/* Секция Заявок */}
         {activeSection === 'applications' && (
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-xl font-semibold mb-4">Заявки</h2>
@@ -189,23 +211,27 @@ const AdminPage: React.FC = () => {
                   <td className="p-3 border">+7 (123) 456-78-90</td>
                   <td className="p-3 border">
                     <div className="space-x-2">
+                      {/* Кнопка для одобрения заявки */}
                       <button className="text-green-600 hover:text-green-800">
                         Одобрить
                       </button>
+                      {/* Кнопка для отклонения заявки */}
                       <button className="text-red-600 hover:text-red-800">
                         Отклонить
                       </button>
                     </div>
                   </td>
                 </tr>
-                {/* Add more rows as needed */}
+                {/* Здесь можно добавить больше заявок */}
               </tbody>
             </table>
           </div>
         )}
+
       </main>
     </div>
   );
 };
 
+// Экспорт компонента для использования в других частях приложения
 export default AdminPage;

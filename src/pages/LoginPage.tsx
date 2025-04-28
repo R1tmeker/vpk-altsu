@@ -1,3 +1,4 @@
+// Импортирование необходимых библиотек и компонентов
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Card, CardContent } from '../components/ui/Card';
@@ -8,29 +9,33 @@ import { useAuth } from '../contexts/AuthContext';
 import { Star, Mail, Lock } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 
+// Описание интерфейса для формы логина
 interface LoginFormData {
   email: string;
   password: string;
 }
 
+// Компонент страницы входа
 const LoginPage: React.FC = () => {
-  const { login } = useAuth();
-  const navigate = useNavigate();
-  const [loginError, setLoginError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  
+  const { login } = useAuth(); // Получаем функцию логина из контекста
+  const navigate = useNavigate(); // Навигация по страницам
+  const [loginError, setLoginError] = useState<string | null>(null); // Ошибка входа
+  const [isLoading, setIsLoading] = useState(false); // Состояние загрузки
+
+  // Инициализация реактивной формы
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>();
 
+  // Функция, вызываемая при отправке формы
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
     setLoginError(null);
     
     try {
-      const result = await login(data.email, data.password);
-      
+      const result = await login(data.email, data.password); // Пытаемся войти
       if (result.success) {
-        navigate('/');
+        navigate('/'); // Переходим на главную при успехе
       } else {
+        // Обработка различных ошибок
         if (result.message.includes('invalid_credentials')) {
           setLoginError('Неверный email или пароль. Пожалуйста, проверьте введенные данные.');
         } else {
@@ -38,16 +43,20 @@ const LoginPage: React.FC = () => {
         }
       }
     } catch (error) {
+      // Обработка ошибок сети или сервера
       setLoginError('Произошла ошибка при входе. Пожалуйста, проверьте подключение к интернету и попробуйте снова.');
       console.error('Login error:', error);
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // Останавливаем индикатор загрузки
     }
   };
 
   return (
+    // Внешний контейнер
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full">
+        
+        {/* Заголовок и логотип */}
         <div className="text-center mb-6">
           <Link to="/" className="inline-flex items-center justify-center">
             <Star className="h-10 w-10 text-secondary-500" />
@@ -59,16 +68,21 @@ const LoginPage: React.FC = () => {
           </p>
         </div>
         
+        {/* Карточка формы */}
         <Card>
           <CardContent className="pt-6">
+            
+            {/* Вывод ошибки логина */}
             {loginError && (
               <Alert variant="error" className="mb-4">
                 {loginError}
               </Alert>
             )}
             
+            {/* Форма входа */}
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-4">
+                {/* Поле ввода email */}
                 <Input
                   id="email"
                   type="email"
@@ -84,6 +98,7 @@ const LoginPage: React.FC = () => {
                   })}
                 />
                 
+                {/* Поле ввода пароля */}
                 <Input
                   id="password"
                   type="password"
@@ -100,12 +115,14 @@ const LoginPage: React.FC = () => {
                 />
               </div>
               
+              {/* Ссылка на восстановление пароля */}
               <div className="mt-2 flex justify-end">
                 <Link to="/forgot-password" className="text-sm text-primary-600 hover:text-primary-700">
                   Забыли пароль?
                 </Link>
               </div>
               
+              {/* Кнопка входа */}
               <Button 
                 type="submit" 
                 variant="primary" 
@@ -116,6 +133,7 @@ const LoginPage: React.FC = () => {
                 Войти
               </Button>
 
+              {/* Ссылка на регистрацию */}
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-600">
                   Нет аккаунта?{' '}
@@ -126,6 +144,7 @@ const LoginPage: React.FC = () => {
               </div>
             </form>
             
+            {/* Дополнительная информация */}
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
                 Для входа используйте учетные данные, полученные при регистрации
