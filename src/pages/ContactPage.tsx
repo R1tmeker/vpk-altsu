@@ -8,12 +8,16 @@ import { useForm } from 'react-hook-form';
 import { ContactForm } from '../types';
 import { handleContactFormSubmission } from '../data/mockData';
 
+// Страница контактов
 const ContactPage: React.FC = () => {
+  // Состояния для отображения процесса отправки и результата отправки формы
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState<{ success: boolean; message: string } | null>(null);
   
+  // Используем хук для работы с формой
   const { register, handleSubmit, formState: { errors }, reset } = useForm<ContactForm>();
 
+  // Функция для обработки отправки формы
   const onSubmit = async (data: ContactForm) => {
     setIsSubmitting(true);
     setSubmitResult(null);
@@ -22,7 +26,7 @@ const ContactPage: React.FC = () => {
       const result = await handleContactFormSubmission(data);
       setSubmitResult(result);
       if (result.success) {
-        reset();
+        reset(); // Сброс формы, если сообщение отправлено успешно
       }
     } catch (error) {
       setSubmitResult({
@@ -30,14 +34,14 @@ const ContactPage: React.FC = () => {
         message: 'Произошла ошибка при отправке сообщения. Пожалуйста, попробуйте позже.',
       });
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false); // Завершаем процесс отправки
     }
   };
 
   return (
     <div className="bg-gray-50 min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Заголовок страницы */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 font-heading mb-4">Контакты</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -46,7 +50,7 @@ const ContactPage: React.FC = () => {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
-          {/* Contact Information */}
+          {/* Контактная информация */}
           <div>
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Наши контакты</h2>
             
@@ -112,7 +116,7 @@ const ContactPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Форма обратной связи */}
           <div>
             <Card>
               <CardContent className="p-6">
@@ -211,4 +215,5 @@ const ContactPage: React.FC = () => {
   );
 };
 
+// Экспорт страницы контактов
 export default ContactPage;

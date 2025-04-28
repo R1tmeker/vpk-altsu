@@ -6,11 +6,18 @@ import { mockNewsArticles, mockUsers } from '../data/mockData';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 
+// Компонент для страницы отдельной статьи
 const NewsArticlePage: React.FC = () => {
+  // Получаем id из параметров URL
   const { id } = useParams();
+  
+  // Ищем статью по id
   const article = mockNewsArticles.find(article => article.id === id);
+  
+  // Находим автора статьи по созданному ID
   const author = mockUsers.find(user => user.id === article?.createdBy);
 
+  // Если статья не найдена, выводим сообщение
   if (!article) {
     return (
       <div className="min-h-screen bg-gray-50 py-12">
@@ -29,6 +36,7 @@ const NewsArticlePage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Ссылка для возврата к списку новостей */}
         <div className="mb-6">
           <Link to="/news" className="inline-flex items-center text-primary-700 hover:text-primary-800">
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -36,6 +44,7 @@ const NewsArticlePage: React.FC = () => {
           </Link>
         </div>
 
+        {/* Если есть изображение, выводим его */}
         {article.coverImage && (
           <div className="relative h-[400px] rounded-lg overflow-hidden mb-8">
             <img
@@ -46,8 +55,10 @@ const NewsArticlePage: React.FC = () => {
           </div>
         )}
 
+        {/* Контент статьи */}
         <div className="bg-white rounded-lg shadow-sm p-8">
           <div className="mb-6">
+            {/* Отображаем категорию статьи */}
             <Badge variant="primary" className="mb-2">
               {article.category}
             </Badge>
@@ -55,8 +66,10 @@ const NewsArticlePage: React.FC = () => {
               {article.title}
             </h1>
             <div className="flex items-center mt-4 text-sm text-gray-600">
+              {/* Дата создания статьи */}
               <Calendar className="h-4 w-4 mr-1" />
               <span>{format(article.createdAt, 'dd.MM.yyyy')}</span>
+              {/* Автор статьи, если найден */}
               {author && (
                 <>
                   <span className="mx-2">•</span>
@@ -66,11 +79,13 @@ const NewsArticlePage: React.FC = () => {
             </div>
           </div>
 
+          {/* Контент статьи в формате HTML */}
           <div 
             className="prose prose-lg max-w-none"
-            dangerouslySetInnerHTML={{ __html: article.content }}
+            dangerouslySetInnerHTML={{ __html: article.content }} // Вставляем HTML контент
           />
 
+          {/* Отображение тегов статьи */}
           {article.tags.length > 0 && (
             <div className="mt-8 pt-6 border-t border-gray-200">
               <div className="flex flex-wrap gap-2">
@@ -92,4 +107,5 @@ const NewsArticlePage: React.FC = () => {
   );
 };
 
+// Экспорт компонента NewsArticlePage
 export default NewsArticlePage;

@@ -7,12 +7,15 @@ import { Badge } from '../components/ui/Badge';
 import { mockNewsArticles } from '../data/mockData';
 import { format } from 'date-fns';
 
+// Компонент NewsPage
 const NewsPage: React.FC = () => {
+  // Состояние для выбранной категории новостей
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  // Get unique categories
+  // Получение уникальных категорий
   const categories = Array.from(new Set(mockNewsArticles.map(article => article.category)));
 
+  // Фильтрация новостей по выбранной категории
   const filteredArticles = selectedCategory
     ? mockNewsArticles.filter(article => article.category === selectedCategory)
     : mockNewsArticles;
@@ -20,7 +23,7 @@ const NewsPage: React.FC = () => {
   return (
     <div className="bg-gray-50 min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Заголовок страницы новостей */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 font-heading mb-4">Новости клуба</h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -28,12 +31,12 @@ const NewsPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Category Filters */}
+        {/* Фильтры категорий */}
         <div className="mb-8 flex flex-wrap justify-center gap-2">
           <Button
             variant={selectedCategory === null ? 'primary' : 'outline'}
             size="sm"
-            onClick={() => setSelectedCategory(null)}
+            onClick={() => setSelectedCategory(null)} // Сброс фильтра
           >
             Все новости
           </Button>
@@ -42,17 +45,18 @@ const NewsPage: React.FC = () => {
               key={category}
               variant={selectedCategory === category ? 'primary' : 'outline'}
               size="sm"
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => setSelectedCategory(category)} // Установка выбранной категории
             >
               {category}
             </Button>
           ))}
         </div>
 
-        {/* News Grid */}
+        {/* Сетка новостей */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {filteredArticles.map((article) => (
             <Card key={article.id} hoverable>
+              {/* Картинка статьи, если она есть */}
               {article.coverImage && (
                 <Link to={`/news/${article.id}`}>
                   <img 
@@ -63,24 +67,28 @@ const NewsPage: React.FC = () => {
                 </Link>
               )}
               <CardContent className="p-6">
+                {/* Информация о статье (категория и дата) */}
                 <div className="flex items-center gap-2 mb-3">
                   <Badge variant="primary">{article.category}</Badge>
                   <span className="text-sm text-gray-500">
-                    {format(article.createdAt, 'dd.MM.yyyy')}
+                    {format(article.createdAt, 'dd.MM.yyyy')} {/* Форматирование даты */}
                   </span>
                 </div>
 
+                {/* Заголовок статьи */}
                 <Link to={`/news/${article.id}`}>
                   <h2 className="text-xl font-semibold mb-2 hover:text-primary-700 transition-colors">
                     {article.title}
                   </h2>
                 </Link>
 
+                {/* Краткое описание статьи */}
                 <p className="text-gray-600 mb-4 line-clamp-3">
                   {article.excerpt}
                 </p>
 
                 <div className="space-y-4">
+                  {/* Теги статьи */}
                   {article.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {article.tags.map((tag, index) => (
@@ -95,6 +103,7 @@ const NewsPage: React.FC = () => {
                     </div>
                   )}
 
+                  {/* Кнопка для перехода к полному тексту статьи */}
                   <Link to={`/news/${article.id}`}>
                     <Button variant="outline" fullWidth>
                       Читать полностью
@@ -106,6 +115,7 @@ const NewsPage: React.FC = () => {
           ))}
         </div>
 
+        {/* Сообщение, если нет новостей по выбранной категории */}
         {filteredArticles.length === 0 && (
           <div className="text-center py-12">
             <p className="text-gray-600">
@@ -118,4 +128,5 @@ const NewsPage: React.FC = () => {
   );
 };
 
+// Экспорт компонента NewsPage
 export default NewsPage;

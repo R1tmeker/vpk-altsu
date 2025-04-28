@@ -7,7 +7,7 @@ export const Footer: React.FC = () => {
     <footer className="bg-primary-700 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Logo and description */}
+          {/* Логотип и описание клуба */}
           <div className="col-span-1 md:col-span-1">
             <Link to="/" className="flex items-center">
               <Star className="h-8 w-8 text-secondary-500" />
@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* Quick links */}
+          {/* Быстрые ссылки на страницы */}
           <div className="col-span-1">
             <h3 className="text-lg font-semibold mb-4">Быстрые ссылки</h3>
             <ul className="space-y-2">
@@ -55,7 +55,7 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Contact information */}
+          {/* Контактная информация */}
           <div className="col-span-1">
             <h3 className="text-lg font-semibold mb-4">Контакты</h3>
             <ul className="space-y-3">
@@ -80,7 +80,7 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Social links and subscription */}
+          {/* Ссылки на социальные сети и форма подписки */}
           <div className="col-span-1">
             <h3 className="text-lg font-semibold mb-4">Мы в соцсетях</h3>
             <div className="flex space-x-4 mb-6">
@@ -109,6 +109,7 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
+        {/* Нижняя часть с правами */}
         <div className="mt-8 pt-8 border-t border-gray-700">
           <p className="text-sm text-gray-400 text-center">
             © {new Date().getFullYear()} Военно-патриотический клуб "Звезда". Все права защищены.

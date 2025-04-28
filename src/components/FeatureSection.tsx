@@ -1,13 +1,16 @@
+// Импорт необходимых зависимостей
 import React from 'react';
-import { Award, ShieldCheck, Users, Target, Compass, FileText } from 'lucide-react';
+import { Award, ShieldCheck, Users, Target, Compass, FileText } from 'lucide-react'; // Иконки для различных направлений
 
+// Тип для отображения фичи
 interface Feature {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
+  icon: React.ReactNode; // Иконка для фичи
+  title: string; // Заголовок фичи
+  description: string; // Описание фичи
 }
 
 export const FeatureSection: React.FC = () => {
+  // Массив направлений деятельности с иконками, заголовками и описаниями
   const features: Feature[] = [
     {
       icon: <ShieldCheck className="h-10 w-10 text-primary-700" />,
@@ -44,6 +47,7 @@ export const FeatureSection: React.FC = () => {
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Заголовок секции и описание */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 font-heading">Направления деятельности</h2>
           <p className="mt-3 text-lg text-gray-600">
@@ -51,12 +55,15 @@ export const FeatureSection: React.FC = () => {
           </p>
         </div>
 
+        {/* Сетка для отображения направлений */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Перебор всех фич и отображение их в виде карточек */}
           {features.map((feature, index) => (
             <div 
               key={index} 
               className="p-6 bg-white border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow"
             >
+              {/* Иконка и информация о фиче */}
               <div className="flex items-start">
                 <div className="flex-shrink-0">{feature.icon}</div>
                 <div className="ml-4">

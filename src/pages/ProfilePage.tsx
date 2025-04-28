@@ -1,44 +1,44 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { Card, CardContent } from '../components/ui/Card';
-import { Button } from '../components/ui/Button';
-import { Input } from '../components/ui/Input';
-import { Alert } from '../components/ui/Alert';
-import { User, Shield, Medal, Calendar, MapPin, Mail, Phone } from 'lucide-react';
-import { mockEvents } from '../data/mockData';
-import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom'; // Для навигации
+import { useAuth } from '../contexts/AuthContext'; // Контекст для авторизации пользователя
+import { Card, CardContent } from '../components/ui/Card'; // Компоненты карточек
+import { Button } from '../components/ui/Button'; // Компонент кнопки
+import { Input } from '../components/ui/Input'; // Компонент ввода
+import { Alert } from '../components/ui/Alert'; // Компонент для отображения ошибок
+import { User, Shield, Medal, Calendar, MapPin, Mail, Phone } from 'lucide-react'; // Иконки
+import { mockEvents } from '../data/mockData'; // Моковые данные для событий
+import { format } from 'date-fns'; // Для форматирования дат
 
 const ProfilePage: React.FC = () => {
-  const { currentUser, isAuthenticated } = useAuth();
-  const navigate = useNavigate();
+  const { currentUser, isAuthenticated } = useAuth(); // Извлекаем данные о текущем пользователе и статус авторизации
+  const navigate = useNavigate(); // Для навигации при необходимости редиректа
 
-  // Redirect if not authenticated
+  // Если пользователь не аутентифицирован, перенаправляем на страницу входа
   React.useEffect(() => {
     if (!isAuthenticated) {
       navigate('/login');
     }
   }, [isAuthenticated, navigate]);
 
-  if (!currentUser) return null;
+  if (!currentUser) return null; // Если данных о пользователе нет, ничего не отображаем
 
-  // Get user's upcoming events
+  // Получаем предстоящие события для пользователя
   const userEvents = mockEvents
-    .filter(event => new Date(event.startDate) > new Date())
-    .slice(0, 3);
+    .filter(event => new Date(event.startDate) > new Date()) // Только будущие события
+    .slice(0, 3); // Показываем максимум 3 события
 
   return (
     <div className="bg-gray-50 min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-3">
-          {/* Profile Info */}
+          {/* Блок с информацией о пользователе */}
           <div className="md:col-span-1">
             <Card>
               <CardContent className="p-6">
                 <div className="text-center">
                   {currentUser.avatar ? (
                     <img
-                      src={currentUser.avatar}
+                      src={currentUser.avatar} // Отображаем аватар пользователя
                       alt={currentUser.name}
                       className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
                     />
@@ -62,6 +62,7 @@ const ProfilePage: React.FC = () => {
 
                 <div className="mt-6 border-t border-gray-200 pt-6">
                   <div className="space-y-4">
+                    {/* Статистика пользователя */}
                     <div className="flex items-center text-gray-600">
                       <Shield className="h-5 w-5 mr-2" />
                       <span>Участник с {format(currentUser.createdAt, 'dd.MM.yyyy')}</span>
@@ -86,9 +87,9 @@ const ProfilePage: React.FC = () => {
             </Card>
           </div>
 
-          {/* Main Content */}
+          {/* Основное содержимое страницы */}
           <div className="md:col-span-2 space-y-8">
-            {/* Personal Information */}
+            {/* Личная информация */}
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Личная информация</h3>
@@ -126,7 +127,7 @@ const ProfilePage: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* Upcoming Events */}
+            {/* Предстоящие занятия */}
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Предстоящие занятия</h3>
@@ -163,7 +164,7 @@ const ProfilePage: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* Achievements */}
+            {/* Достижения */}
             <Card>
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Достижения</h3>

@@ -4,6 +4,7 @@ import { Shield, Award, Users, Target } from 'lucide-react';
 const AboutPage: React.FC = () => {
   return (
     <div className="bg-white">
+      {/* Hero Section */}
       <div className="relative">
         <div className="absolute inset-0 bg-primary-700/80" />
         <div 
@@ -24,6 +25,7 @@ const AboutPage: React.FC = () => {
         </div>
       </div>
 
+      {/* Mission Section */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-12">
@@ -34,6 +36,7 @@ const AboutPage: React.FC = () => {
             </p>
           </div>
 
+          {/* Features Section */}
           <div className="grid md:grid-cols-2 gap-8 mt-12">
             <div className="bg-gray-50 rounded-lg p-8">
               <Shield className="h-12 w-12 text-primary-700 mb-4" />
@@ -74,12 +77,14 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Club History Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 font-heading mb-8 text-center">История клуба</h2>
             
             <div className="space-y-8">
+              {/* Timeline Entries */}
               <div className="flex gap-4">
                 <div className="flex-shrink-0 w-24 text-center">
                   <span className="text-lg font-semibold text-primary-700">2024</span>
@@ -136,6 +141,7 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Call to Action Section */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-primary-700 rounded-lg overflow-hidden">

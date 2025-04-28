@@ -4,31 +4,33 @@ import { useAuth } from '../contexts/AuthContext';
 import { Users, CalendarDays, Image, MessageSquare } from 'lucide-react';
 
 const AdminPage: React.FC = () => {
+  // Получение текущего пользователя и роли из контекста аутентификации
   const { currentUser, userRole } = useAuth();
-  const navigate = useNavigate();
-  const [activeSection, setActiveSection] = useState<string>('dashboard');
-  
-  // Redirect if not admin
+  const navigate = useNavigate(); // Хук для навигации
+  const [activeSection, setActiveSection] = useState<string>('dashboard'); // Состояние для активного раздела
+
+  // Перенаправление на страницу входа, если пользователь не является администратором
   React.useEffect(() => {
     if (!currentUser || userRole !== 'admin') {
       navigate('/login');
     }
-  }, [currentUser, userRole, navigate]);
+  }, [currentUser, userRole, navigate]); // Эффект с зависимостями
 
-  // If not logged in or not authorized, don't render the page content
+  // Если пользователь не авторизован или не является администратором, контент не рендерится
   if (!currentUser || userRole !== 'admin') {
     return null;
   }
 
   return (
     <div className="flex min-h-screen bg-gray-100">
-      {/* Sidebar */}
+      {/* Сайдбар */}
       <aside className="w-64 bg-white shadow-md">
         <div className="p-4 border-b">
           <h2 className="text-xl font-bold text-gray-800">Панель управления</h2>
         </div>
         <nav className="p-4">
           <ul className="space-y-2">
+            {/* Кнопка для перехода в раздел "Расписание" */}
             <li>
               <button
                 onClick={() => setActiveSection('schedule')}
@@ -40,6 +42,7 @@ const AdminPage: React.FC = () => {
                 Расписание
               </button>
             </li>
+            {/* Кнопка для перехода в раздел "Состав" */}
             <li>
               <button
                 onClick={() => setActiveSection('composition')}
@@ -51,6 +54,7 @@ const AdminPage: React.FC = () => {
                 Состав
               </button>
             </li>
+            {/* Кнопка для загрузки фото */}
             <li>
               <button
                 onClick={() => setActiveSection('photos')}
@@ -62,6 +66,7 @@ const AdminPage: React.FC = () => {
                 Загрузить фото
               </button>
             </li>
+            {/* Кнопка для просмотра заявок */}
             <li>
               <button
                 onClick={() => setActiveSection('applications')}
@@ -77,7 +82,7 @@ const AdminPage: React.FC = () => {
         </nav>
       </aside>
 
-      {/* Main Content */}
+      {/* Основной контент */}
       <main className="flex-1 p-8">
         <header className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">
@@ -85,7 +90,7 @@ const AdminPage: React.FC = () => {
           </h1>
         </header>
 
-        {/* Content Sections */}
+        {/* Разделы контента */}
         {activeSection === 'schedule' && (
           <div className="bg-white rounded-lg shadow p-6">
             <h2 className="text-xl font-semibold mb-4">Расписание</h2>
@@ -105,7 +110,7 @@ const AdminPage: React.FC = () => {
                   <td className="p-3 border">10:00 - 11:30</td>
                   <td className="p-3 border">ВУЦ</td>
                 </tr>
-                {/* Add more rows as needed */}
+                {/* Добавьте больше строк по мере необходимости */}
               </tbody>
             </table>
           </div>
@@ -132,7 +137,7 @@ const AdminPage: React.FC = () => {
                     </button>
                   </td>
                 </tr>
-                {/* Add more rows as needed */}
+                {/* Добавьте больше строк по мере необходимости */}
               </tbody>
             </table>
           </div>
@@ -198,7 +203,7 @@ const AdminPage: React.FC = () => {
                     </div>
                   </td>
                 </tr>
-                {/* Add more rows as needed */}
+                {/* Добавьте больше строк по мере необходимости */}
               </tbody>
             </table>
           </div>
